@@ -31,22 +31,29 @@ function writeToLog(operationIdentifier, prevResult, operationNumber, newResult)
 function calculateResuult(calculationType){
     const enteredNumber = getUserInput();
     const initialResult = currentResult;
-    let matchOperator;
-    if(calculationType === 'ADD'){
-        currentResult += enteredNumber;
-        matchOperator = '+';
-    } else if(calculationType === 'SUBTRACT'){
-        currentResult -= enteredNumber;
-        matchOperator = '-';
-    } else if(calculationType === 'MULTIPLY'){
-        currentResult *= enteredNumber;
-        matchOperator = '*';
-    }   else if(calculationType === 'DIVIDE'){
-        currentResult /= enteredNumber;
-        matchOperator = '/';
+    if(calculationType !== 'ADD' && calculationType !== 'SUBTRACT' && calculationType !== 'MULTIPLY' && calculationType !== 'DIVIDE' || !enteredNumber){
+        return;
     }
-    createAndWriteOutput(matchOperator, initialResult, enteredNumber);
-    writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+
+    if(calculationType === 'ADD' || calculationType === 'SUBTRACT' || calculationType === 'MULTIPLY' || calculationType === 'DIVIDE'){
+        let matchOperator;
+        if(calculationType === 'ADD'){
+            currentResult += enteredNumber;
+            matchOperator = '+';
+        } else if(calculationType === 'SUBTRACT'){
+            currentResult -= enteredNumber;
+            matchOperator = '-';
+        } else if(calculationType === 'MULTIPLY'){
+            currentResult *= enteredNumber;
+            matchOperator = '*';
+        }   else if(calculationType === 'DIVIDE'){
+            currentResult /= enteredNumber;
+            matchOperator = '/';
+        }
+        createAndWriteOutput(matchOperator, initialResult, enteredNumber);
+        writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+    }
+    
 
 }
 
