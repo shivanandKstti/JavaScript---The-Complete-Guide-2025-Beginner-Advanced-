@@ -232,7 +232,12 @@ function healPlayerHandler(){
 }
 
 function printLogHandler(){
-    console.log(batteleLog);
+    // for(let i = 0; i < batteleLog.length; i++) {
+    //     console.log(batteleLog[i]);
+    // }
+    for(const logEntry of batteleLog) {
+        console.log(logEntry);
+    }
 }
 attackBtn.addEventListener('click', attackHandler);
 strongAttackBtn.addEventListener('click', strongAttachHandler);
