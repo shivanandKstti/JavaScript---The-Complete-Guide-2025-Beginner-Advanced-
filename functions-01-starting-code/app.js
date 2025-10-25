@@ -36,18 +36,24 @@ const getPlayerChoice = function() {
     return selection;
 }
 
-const getWinner = function(computerChoice, playerChoice) {
-    if (computerChoice === playerChoice) {
-        return RESULT_DRAW;
-    } else if (
-        (computerChoice === ROCK && playerChoice === PAPER) ||
-        (computerChoice === PAPER && playerChoice === SCISSORS) ||
-        (computerChoice === SCISSORS && playerChoice === ROCK)
-    ) {
-        return RESULT_PLAYER_WINS;
-    } else {
-        return RESULT_COMPUTER_WINS;
-    }
+const getWinner = (computerChoice, playerChoice) => {
+
+    return computerChoice === playerChoice ? RESULT_DRAW :
+    (computerChoice === ROCK && playerChoice === PAPER) ||
+    (computerChoice === PAPER && playerChoice === SCISSORS) ||
+    (computerChoice === SCISSORS && playerChoice === ROCK) ? RESULT_PLAYER_WINS : RESULT_COMPUTER_WINS; 
+
+    // if (computerChoice === playerChoice) {
+    //     return RESULT_DRAW;
+    // } else if (
+    //     (computerChoice === ROCK && playerChoice === PAPER) ||
+    //     (computerChoice === PAPER && playerChoice === SCISSORS) ||
+    //     (computerChoice === SCISSORS && playerChoice === ROCK)
+    // ) {
+    //     return RESULT_PLAYER_WINS;
+    // } else {
+    //     return RESULT_COMPUTER_WINS;
+    // }
 }
 
 const getComputerChoice = function(){
@@ -61,7 +67,7 @@ const getComputerChoice = function(){
     }
 };
 
-startGameBtn.addEventListener('click', function() {
+startGameBtn.addEventListener('click', () => {
     if(gameIsRunning) {
         return;
     }
@@ -69,7 +75,12 @@ startGameBtn.addEventListener('click', function() {
     console.log('Game is starting...');
     const playerSelection = getPlayerChoice();
     const computerChoice =  getComputerChoice();
-    const winner = getWinner(computerChoice, playerSelection);
+    let winner;
+    if (playerSelection) {
+        winner = getWinner(computerChoice, playerSelection);
+    } else {
+        winner = getWinner(computerChoice, DEFAULT_USER_CHOICE);
+    }
     let message = `You picked ${playerSelection}, computer picked ${computerChoice}. `;
     if (winner === RESULT_DRAW) {
         message += "It's a draw!";
